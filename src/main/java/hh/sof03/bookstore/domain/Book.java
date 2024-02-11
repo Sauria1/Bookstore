@@ -1,14 +1,31 @@
 package hh.sof03.bookstore.domain;
 
-public class Book {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String title;
     private String author;
     private String isbn;
     private int publicationYear;
     private double price;
 
-    // Alla on getterit ja setterit
+    public Book() {
+        
+    }
+    
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
     public String getTitle() {
         return title;
     }
@@ -39,23 +56,17 @@ public class Book {
     public void setPrice(double price) {
         this.price = price;
     }
-    
-    // Konstruktori
-    public Book(String title, String author, String isbn, int publicationYear, double price) {
+    public Book(long id, String title, String author, String isbn, int publicationYear, double price) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.publicationYear = publicationYear;
         this.price = price;
     }
-
-    // toString
     @Override
     public String toString() {
-        return "Book [title=" + title + ", author=" + author + ", isbn=" + isbn + ", publicationYear=" + publicationYear
-                + ", price=" + price + "]";
+        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", publicationYear="
+                + publicationYear + ", price=" + price + "]";
     }
-    
-    
-
 }
