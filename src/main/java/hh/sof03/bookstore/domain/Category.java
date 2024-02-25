@@ -15,7 +15,6 @@ public class Category {
     // Getterit, setterit, konstruktori ja toString()
 
     public Category() {
-        
     }
             
     public Long getCategoryId() {
