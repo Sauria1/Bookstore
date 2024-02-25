@@ -31,8 +31,11 @@ public class BookstoreApplication {
 			categoryRepository.save(comic);
 
 			Book book1 = new Book(1, "Title 1", "Author 1", "ISBN 1", 2024, 25.0);
+			book1.setCategory(sciFi);
 			Book book2 = new Book(2, "Title 2", "Author 2", "ISBN 2", 2024, 25.0);
+			book2.setCategory(comic);
 			Book book3 = new Book(3, "Title 3", "Author 3", "ISBN 3", 2024, 25.0);
+			book3.setCategory(comic);
 
 			repository.save(book1);
 			repository.save(book2);
