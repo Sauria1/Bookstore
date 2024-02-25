@@ -12,12 +12,16 @@ import java.util.Optional;
 
 import hh.sof03.bookstore.domain.BookRepository;
 import hh.sof03.bookstore.domain.Book;
+import hh.sof03.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
 
     @Autowired
     private BookRepository repository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping("/booklist")
     public String bookList(Model model) {
@@ -28,6 +32,7 @@ public class BookController {
     @GetMapping("/add")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addbook";
     }
 
@@ -49,6 +54,7 @@ public class BookController {
         if (optionalBook.isPresent()) {
             Book book = optionalBook.get();
             model.addAttribute("book", book);
+            model.addAttribute("categories", categoryRepository.findAll());
             return "editbook";
         } else {
             return "redirect:/booklist";
