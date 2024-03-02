@@ -19,12 +19,12 @@ public class BookRestController {
     @Autowired
     private BookRepository bookRepository;
 
-    @GetMapping("/books")
+    @GetMapping("/api/books")
     public List<Book> getAllBooks() {
         return (List<Book>) bookRepository.findAll();
     }
 
-    @GetMapping("/books/{id}")
+    @GetMapping("/api/books/{id}")
     public Optional<Book> getBookbyId(@PathVariable Long id) {
         return bookRepository.findById(id);
     }
