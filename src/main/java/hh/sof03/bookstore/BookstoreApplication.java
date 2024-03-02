@@ -14,6 +14,7 @@ import hh.sof03.bookstore.domain.Book;
 
 @SpringBootApplication
 public class BookstoreApplication {
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);

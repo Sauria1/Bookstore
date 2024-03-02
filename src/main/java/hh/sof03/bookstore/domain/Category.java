@@ -2,6 +2,8 @@ package hh.sof03.bookstore.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ public class Category {
 
     // Getterit, setterit, konstruktori ja toString()
 
+     @JsonBackReference
      @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Book> books;
 

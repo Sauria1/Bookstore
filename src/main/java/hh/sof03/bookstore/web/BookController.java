@@ -71,6 +71,7 @@ public class BookController {
             book.setPublicationYear(editedBook.getPublicationYear());
             book.setIsbn(editedBook.getIsbn());
             book.setPrice(editedBook.getPrice());
+            book.setCategory(editedBook.getCategory());
             repository.save(book);
         }
         return "redirect:/booklist";
