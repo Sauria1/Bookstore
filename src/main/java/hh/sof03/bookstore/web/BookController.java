@@ -47,12 +47,10 @@ public class BookController {
         return "redirect:/booklist";
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/delete/{id}")
-    public String deleteBook(@PathVariable("id") Long id, Model model, Authentication authentication) {
-        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            repository.deleteById(id);
-        }
+    public String deleteBook(@PathVariable("id") Long id) {
+        repository.deleteById(id);
         return "redirect:/booklist";
     }
 
