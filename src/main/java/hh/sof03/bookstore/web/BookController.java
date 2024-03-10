@@ -1,5 +1,7 @@
 package hh.sof03.bookstore.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,10 @@ public class BookController {
     private CategoryRepository categoryRepository;
 
     @GetMapping("/booklist")
-    public String bookList(Model model) {
+    public String bookList(Model model, Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            model.addAttribute("username", authentication.getName());
+        }
         model.addAttribute("books", repository.findAll());
         return "booklist";
     }
@@ -42,9 +47,12 @@ public class BookController {
         return "redirect:/booklist";
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @RequestMapping("/delete/{id}")
-    public String deleteBook(@PathVariable("id") Long id, Model model) {
-        repository.deleteById(id);
+    public String deleteBook(@PathVariable("id") Long id, Model model, Authentication authentication) {
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            repository.deleteById(id);
+        }
         return "redirect:/booklist";
     }
 
